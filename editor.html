@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Portfolio editor</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="editor.css">
+  <script src="content.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="editor.js" defer></script>
+</head>
+<body class="editor-body">
+<a class="skip-link" href="#editor-main">Skip to editor</a>
+<header class="editor-header"><div><a href="index.html" class="editor-brand">✳ Portfolio studio</a><p>Your story, your settings.</p></div><div class="editor-actions"><a href="index.html?preview=1" target="portfolio-preview" class="button" id="preview-link">Preview ↗</a><button type="button" class="button primary" id="export-button">Download content.js ↓</button></div></header>
+<div class="editor-layout">
+  <aside class="editor-sidebar"><nav aria-label="Editor sections" id="editor-navigation"></nav><div class="editor-help"><strong>How publishing works</strong><p>Edit → Preview → Download → Replace content.js → Commit & push.</p><p>Drafts stay in this browser. This editor does not modify the live website.</p><button type="button" id="import-button" class="small-button">Import content.js / JSON</button><input id="import-file" type="file" accept=".js,.json" hidden><button type="button" id="reset-button" class="small-button">Restore published file</button></div></aside>
+  <main id="editor-main"><div class="editor-page-heading"><div><p class="mono">CUSTOMIZE / NO BUILD REQUIRED</p><h1>Make it your own.</h1><p>Start with a few words. Build out the rest as you go.</p></div><p id="save-status" role="status" aria-live="polite">Loading editor…</p></div><div class="editor-alert" id="editor-alert" role="status" hidden></div><div id="editor-panels"></div></main>
+</div>
+<noscript><p>Please enable JavaScript to use the visual editor.</p></noscript>
+</body>
+</html>
