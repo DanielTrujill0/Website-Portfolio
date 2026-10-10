@@ -5,6 +5,7 @@
   const sectionKeys = ['projects','about','skills','experience','playground','contact'];
   const projectKeys = ['id','title','category','year','status','summary','role','duration','tools','cover','coverAlt','repository','demo','overview','challenge','process','outcome','lessons'];
   const presets = {
+    sketchbook: {accent:'#f2d987',background:'#fbf7ed',ink:'#34322d'},
     sage: {accent:'#c7edaa',background:'#f7f7f2',ink:'#23332a'},
     ocean: {accent:'#a8e6ee',background:'#f4f8fa',ink:'#173648'},
     clay: {accent:'#efbf9e',background:'#faf5ef',ink:'#422c24'},
@@ -31,8 +32,8 @@
     });
     return {
       version:1, profile:pick(input.profile,profileKeys),
-      interactions:Object.fromEntries(['dots','tilt','ribbon'].map(key=>[key,input.interactions?.[key] !== false])),
-      theme:{preset, ...Object.fromEntries(['accent','background','ink'].map(key => [key,/^#[a-f0-9]{6}$/i.test(theme[key]) ? theme[key] : colors[key]])),font:['editorial','modern','technical'].includes(theme.font) ? theme.font : 'editorial',radius:['soft','square','round'].includes(theme.radius) ? theme.radius : 'soft'},
+      interactions:{...Object.fromEntries(['dots','tilt','scroll','shapes','magnetism'].map(key=>[key,input.interactions?.[key] !== false])),dotDensity:['subtle','balanced','rich'].includes(input.interactions?.dotDensity)?input.interactions.dotDensity:'rich'},
+      theme:{preset, ...Object.fromEntries(['accent','background','ink'].map(key => [key,/^#[a-f0-9]{6}$/i.test(theme[key]) ? theme[key] : colors[key]])),drawing:['pencil','ink','marker'].includes(theme.drawing)?theme.drawing:'pencil',paper:['plain','dotted','ruled'].includes(theme.paper)?theme.paper:'dotted',font:['kalam','caveat','patrick','sketch','editorial','modern','technical'].includes(theme.font) ? theme.font : 'editorial',radius:['soft','square','round'].includes(theme.radius) ? theme.radius : 'soft'},
       sections:Object.fromEntries(sectionKeys.map(key => [key,input.sections?.[key] !== false])),
       labels:pick(input.labels,sectionKeys), projects,
       skills:rows(input.skills).map(row => pick(row,['title','items'])),
@@ -50,7 +51,12 @@
   function applyTheme(theme) {
     const root = document.documentElement;
     ['accent','background','ink'].forEach(key => root.style.setProperty('--'+key,theme[key]));
-    root.style.setProperty('--heading', theme.font === 'editorial' ? "Georgia,'Times New Roman',serif" : theme.font === 'technical' ? 'Consolas,monospace' : "'Segoe UI',Arial,sans-serif");
+    const fonts={kalam:"'Kalam','Segoe Print',cursive",caveat:"'Caveat','Segoe Print',cursive",patrick:"'Patrick Hand','Segoe Print',cursive",sketch:"'Kalam','Segoe Print',cursive",editorial:"'Lora',Georgia,serif",modern:"'DM Sans','Segoe UI',sans-serif",technical:'Consolas,monospace'};
+    root.style.setProperty('--heading',fonts[theme.font] || fonts.kalam);
+    root.style.setProperty('--sans',"'DM Sans','Segoe UI',Arial,sans-serif");
+    document.body.dataset.headingFont=theme.font;
+    document.body.dataset.paper=theme.paper;
+    document.documentElement.style.setProperty('--pencil-weight',{pencil:'1.6px',ink:'2.3px',marker:'3.4px'}[theme.drawing]);
     root.style.setProperty('--radius', {soft:'18px',square:'3px',round:'32px'}[theme.radius]);
   }
   function element(tag,attrs,...children) {
@@ -65,7 +71,9 @@
     const match = raw.match(/window\.PORTFOLIO\s*=\s*([\s\S]*?);?\s*$/);
     return normalize(JSON.parse(match ? match[1].replace(/;\s*$/,'') : raw));
   }
-  window.PortfolioCore={normalize,safeUrl,emailUrl,applyTheme,element,exportText,parseContent,presets,profileKeys,sectionKeys,projectKeys};
+  async function copyText(value){
+    if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(value);return;}catch{}}
+    const previous=document.activeElement,area=document.createElement('textarea');area.value=value;area.style.cssText='position:fixed;left:-9999px;top:0';document.body.append(area);area.select();const copied=document.execCommand('copy');area.remove();previous?.focus();if(!copied)throw new Error('Copy unavailable');
+  }
+  window.PortfolioCore={copyText,normalize,safeUrl,emailUrl,applyTheme,element,exportText,parseContent,presets,profileKeys,sectionKeys,projectKeys};
 })();
-
-

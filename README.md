@@ -16,7 +16,7 @@ All personal details are intentionally blank. The default page uses clearly mark
 8. Open index.html to check the saved file, then commit and push:
 
 ```powershell
-git add index.html project.html editor.html content.js core.js app.js styles.css editor.js editor.css assets README.md .gitignore .nojekyll
+git add .
 git commit -m "Add customizable portfolio and visual editor"
 git push
 ```
@@ -59,7 +59,7 @@ Skills, Experience, and Experiments also support adding, removing, and reorderin
 
 Keep the `window.PORTFOLIO = { ... };` wrapper in content.js. Text supports line breaks and is rendered as plain text, not HTML. Colors use six-digit hex values. Changing styles.css changes the design directly; the editor overrides only the supported colors, heading font, and corner radius.
 
-No third-party libraries, web fonts, analytics, accounts, or backend are required. All site links and assets use relative paths for GitHub Pages project hosting. The browser must support modern JavaScript and CSS color-mix (current Chrome, Edge, Firefox, and Safari).
+No third-party libraries, analytics, accounts, or backend are required. Fonts are stored locally with their licenses; no external font service is contacted. All site links and assets use relative paths for GitHub Pages project hosting. The browser must support modern JavaScript and CSS color-mix (current Chrome, Edge, Firefox, and Safari).
 
 ## Future updates
 
@@ -73,8 +73,25 @@ git push
 
 Wait for the Pages deployment to finish in GitHub's Actions tab, then refresh the website. If the old version persists, use Ctrl + Shift + R.
 
-## Interactive graphics
 
-The homepage has a cursor-reactive dot field, a springy graphic poster with Orbit / Wave / Grid layouts and pause/resume, hover tilt on artwork, and an animated typography ribbon. These use your theme colors. Under Appearance in the visual editor, toggle Cursor-reactive dots, Artwork hover tilt, or Animated graphic ribbon. The settings are stored in `content.js` under `interactions`.
+## Sketchbook design & interactions
 
-The poster controls also work with a keyboard. Touch scrolling is preserved. Reduced-motion preferences disable continuous animation and hover movement, while layout buttons still work. Dot animation stops when it is offscreen or the tab is hidden. Customize behavior in `interactions.js` and visuals at the bottom of `styles.css`.
+Warm paper, handwritten headings, taped cards, pencil illustrations, margin doodles, hand-drawn borders, and subtle pixel details replace the 3D dot sculpture. On dotted paper, background dots form a notebook grid and gently react to your cursor. They never morph into a sphere or helix.
+
+- Scroll to draw more of the notebook illustration and move the margin sketches.
+- Move your mouse to leave a brief pencil trail. Click to make a small pencil burst.
+- Click the sticky note to change its message. Drag it to reposition it, or focus it and use arrow keys. Note positions are temporary.
+- Hover project cards for paper lift, links for marker underlines, and the logo for a brief pixel nudge.
+- Open case-study gallery images in a larger viewer with previous/next, Escape to close, and focus return.
+- Use the footer's Pause motion control for ambient effects. Reduced-motion settings produce static artwork; buttons and image viewing remain usable.
+
+In editor.html > Appearance, choose the Sketchbook palette, Sketchbook heading style, plain/dotted/ruled paper, and pencil/ink/marker line weight. You can still turn individual motion effects off and choose dot density. Download content.js to save these choices to the repository.
+
+The original SVG drawing lives in sketch-art.js. Other graphics and behavior live in interactions.js and the Sketchbook edition section of styles.css. The editor remains a browser-local tool, and all personal details remain blank until you fill them in.
+
+
+## Typography & new controls
+
+The cursor trail fades segment by segment over **160 milliseconds**. Headings can use Kalam (pencil handwriting), Caveat (loose notes), Patrick Hand (neat handwriting), Lora (editorial serif), DM Sans (clean sans), or a technical monospace. Body text uses DM Sans. These fonts are bundled in assets/fonts with their SIL Open Font Licenses so your choices are consistent across devices. Use Appearance > Heading style to choose a font and view a specimen before exporting.
+
+Titled projects include a search field that searches title, summary, category, and tools. Search combines with category filters. Press **/** to focus the search and **Escape** to clear it. Case studies include links to their filled-in sections. When you add a valid email, Contact includes a Copy email button as well as Say hello. Blank personal fields remain blank.

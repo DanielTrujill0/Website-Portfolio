@@ -4,19 +4,18 @@
  */
 window.PORTFOLIO = {
   "version": 1,
-  "interactions": { "dots": true, "tilt": true, "ribbon": true },
+  "interactions": { "dots": true, "tilt": true, "scroll": true, "shapes": true, "magnetism": true, "dotDensity": "rich" },
   "profile": {
     "name": "", "initials": "", "role": "", "location": "", "status": "",
     "headline": "", "intro": "", "email": "", "github": "", "linkedin": "",
     "instagram": "", "resume": "", "portrait": "", "portraitAlt": "",
     "aboutTitle": "", "about": "", "interests": "", "contactTitle": "", "contactText": ""
   },
-  "theme": { "preset": "sage", "accent": "#c7edaa", "background": "#f7f7f2", "ink": "#23332a", "font": "editorial", "radius": "soft" },
+  "theme": { "preset": "sketchbook", "accent": "#f2d987", "background": "#fbf7ed", "ink": "#34322d", "paper": "dotted", "font": "kalam", "radius": "soft" },
   "sections": { "projects": true, "about": true, "skills": true, "experience": true, "playground": true, "contact": true },
-  "labels": { "projects": "Selected work", "about": "A little more about me", "skills": "Tools & interests", "experience": "The journey so far", "playground": "Small ideas. Open possibilities.", "contact": "Let’s start a conversation." },
+  "labels": { "projects": "Selected work", "about": "A little more about me", "skills": "Tools & interests", "experience": "The journey so far", "playground": "Studies & explorations", "contact": "Let’s start a conversation." },
   "projects": [],
   "skills": [],
   "experience": [],
   "playground": []
 };
-
